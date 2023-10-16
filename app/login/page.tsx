@@ -11,7 +11,7 @@ export default async function LoginPage() {
 
   if (session) {
     const userName = session.user.role;
-    console.log(userName);
+    console.log(session);
     redirect('/mainContent');
   }
   return <Form />;

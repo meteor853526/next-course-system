@@ -12,6 +12,7 @@ export default function Home() {
       <div>
         <button onClick={handleLoginButtonClick}>Go to Login</button>
       </div>
+      
     </main>
   )
 }

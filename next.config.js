@@ -1,5 +1,10 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const nextConfig = {
+  reactStrictMode: true, 
+  images : { 
+    domains : ['cdn.builder.io'] 
+  } 
+}
 module.exports = {
     env: {
       'MYSQL_HOST': '35.229.163.235',
