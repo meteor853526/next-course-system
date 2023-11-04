@@ -1,6 +1,6 @@
 import pool from './db';
 
-async function getUser(username) {
+export async function getUser(username) {
     const res = await executeQuery({
         query: 'SELECT * FROM user WHERE account = ?',
         values: [username],
@@ -8,7 +8,13 @@ async function getUser(username) {
     return res[0];
 }
 
-
+// export async function addCourse(username) {
+//   const res = await executeQuery({
+//       query: 'SELECT * FROM user WHERE account = ?',
+//       values: [username],
+//   });
+//   return res[0];
+// }
 
 
 async function executeQuery({ query, values }) {
@@ -21,5 +27,3 @@ async function executeQuery({ query, values }) {
       throw error;
     }
 }
-
-export { getUser as getUser }

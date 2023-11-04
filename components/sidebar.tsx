@@ -1,8 +1,7 @@
-"use client";
+
 import { getServerSession } from 'next-auth';
 import { getSession ,useSession} from 'next-auth/react'
 
-import { options } from "../api/auth/[...nextauth]/options"
 import { redirect } from 'next/navigation';
 import  DotImg from  '../../images/dot.png'
 

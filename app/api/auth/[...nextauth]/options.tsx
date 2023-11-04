@@ -17,7 +17,6 @@ export const options: NextAuthOptions = {
             credentials: {
                 username: { },
                 password: { },
-                role: { }
             },
             async authorize (credentials) {
                 console.log(credentials)

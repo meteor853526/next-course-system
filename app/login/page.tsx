@@ -12,7 +12,12 @@ export default async function LoginPage() {
   if (session) {
     const userName = session.user.role;
     console.log(session);
-    redirect('/mainContent');
+    if(session.user.role == 'student'){
+      redirect('/student');
+    }else{
+      redirect('/staff');
+    }
+    
   }
   return <Form />;
 }
