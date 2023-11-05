@@ -27,7 +27,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-, "app/client/layout.jsx"  ],
+, "app/client/layout.jsx", "app/student/layout.jsx"  ],
   "exclude": [
     "node_modules"
   ]

@@ -17,7 +17,7 @@ export async function getUser(username) {
 // }
 
 
-async function executeQuery({ query, values }) {
+export async function executeQuery({ query, values }) {
     try {
       const connection = await pool.getConnection();
       const [rows, fields] = await connection.execute(query, values);

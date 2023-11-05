@@ -8,8 +8,7 @@ export default function clientPage  () {
             redirect('/api/auth/signin?callbackUrl=/client')
         }
     });
-    console.log(session)
-    console.log("????????????????????")
+
     return <div className="gap-4 bg-slate-50 h-screen w-screen">
                 
                 
