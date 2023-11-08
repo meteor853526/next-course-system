@@ -7,9 +7,10 @@ export const options: NextAuthOptions = {
     
     session: {
         strategy: 'jwt',
+        maxAge: 15 * 60 ,
     },
     pages: {
-        signIn: '/login',
+        signIn: '/entrance/login',
     },
     providers: [
         CredentialsProvider({
@@ -24,7 +25,7 @@ export const options: NextAuthOptions = {
                 // to verify with credentials
                 // Docs: https://next-auth.js.org/configuration/providers/credentials
                 const user = await getUser(credentials.username) // username 
-             
+                
                 // const passwordCorrect = await compare(
                 //     credentials?.password || '',
                 //     result[0].password

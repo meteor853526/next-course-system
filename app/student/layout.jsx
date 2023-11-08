@@ -1,17 +1,13 @@
-
-import Sidebar from '../../components/sidebar'
-import Navbar from '../../components/navbar'
+import Sidebar from "../../components/sidebar"
+import DefaultSidebar from "../../components/defaultbar"
 
 export default async function ClientLayout({ children }) {
   return ( // wrap session with provider so you can get userdata in following components
-        <section>
-            <Navbar></Navbar>
+        <section className="bg-slate-50 h-screen w-screen">
             <main>
-              <Sidebar></Sidebar>
+              
               {children}
             </main>
-            
-            
         </section>
   )
 }

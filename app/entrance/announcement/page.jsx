@@ -1,9 +1,8 @@
 
-import Courselist from'../../components/courselist'
-import TimeTable from '../../components/timetable'
-export default function courseDataTable ()  {
-  return <div className=" gap-4 bg-slate-50 ">
-            <div className=''>navbar</div>
+
+export default function announcementPage ()  {
+  return <div >
+            {/* <div className=''>navbar</div>
 
                 <div className="grid grid-cols-2 gap-2 auto-rows-min">
                     <div className=" place-self-center ">
@@ -17,6 +16,6 @@ export default function courseDataTable ()  {
                         </div>
                     
                     </div>
-                </div>
+                </div> */}
         </div>;
 };

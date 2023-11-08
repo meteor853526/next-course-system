@@ -20,7 +20,7 @@ export default  function userPage  () {
     }
  
     console.log(session?.user?.account)
-    return <div className="gap-4 bg-slate-50 h-screen w-screen"> 
+    return <div className=""> 
                 <h1>userpage:{session?.user?.account}</h1>
                 <button onClick={getUserData}>make call</button>
             </div>;
