@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import React from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Disclosure } from "@headlessui/react";
@@ -16,11 +16,12 @@ import { BiMessageSquareDots } from "react-icons/bi";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import Defaulebar from './defaultbar'
-import { useRouter ,redirect} from 'next/navigation';
+import { useRouter ,usePathname, useSearchParams} from 'next/navigation';
 
 export default function Sidebar() {
   const router = useRouter();
   const { data: session } = useSession();
+
 
   const handleSignOut = async () => {
     await signOut({redirect: true, callbackUrl: '/entrance/announcement' });
@@ -32,13 +33,13 @@ export default function Sidebar() {
     router.push("/entrance/course");
   };
   const handleClickToUserPage = async () => {
-    router.push(`/${session?.user?.role}/user`);
+    router.push(`/${session?.user?.role}/user/?user=${session?.user?.account}`);
   };
   const handleClickToTablePage = async () => {
-    router.push(`/${session?.user?.role}/table`);
+    router.push(`/${session?.user?.role}/table/?user=${session?.user?.account}`);
   };
   const handleClickToSelectCoursePage = async () => {
-    router.push(`/${session?.user?.role}/selectCourse`);
+    router.push(`/${session?.user?.role}/selectCourse/?user=${session?.user?.account}`);
   };
 
 

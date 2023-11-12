@@ -19,13 +19,8 @@ import { Underdog } from "next/font/google";
 export default function DefaultSidebar() {
     const router = useRouter();
     const { data: session , status} = useSession();
-    // if (session) {
-    //     if(session.user.role == 'student'){
-    //       router.push('/student');
-    //     }else if(session.user.role == 'staff') {
-    //       router.push('/staff');
-    //     }
-    // }
+
+
     const handleClickToAnnouncemantPage = async () => {
       router.push('/entrance/announcement');
         
@@ -38,7 +33,7 @@ export default function DefaultSidebar() {
     };
 
     useEffect(() => {
-      // 確保 session 資料可用且不為 null
+      // 確保 session 
 
     }, [session,status]);
 

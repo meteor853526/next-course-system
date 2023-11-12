@@ -2,7 +2,7 @@
 import { getServerSession } from 'next-auth';
 import { useSession } from 'next-auth/react';
 import { options } from "../../api/auth/[...nextauth]/options"
-import { redirect } from 'next/navigation';
+import { redirect,useSearchParams } from 'next/navigation';
 
 interface user{
     role: string,
@@ -10,6 +10,9 @@ interface user{
 }
 export default  function userPage  () {
     const { data: session } = useSession();
+    const searchParams = useSearchParams()
+
+    console.log(searchParams)
 
     if(!session)return 
     const getUserData = async () => {

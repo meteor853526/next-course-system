@@ -8,7 +8,11 @@ interface Student {
 export default class StudentServicve{
 
  async getStudent(account:string) {
-
     return studentRepository.getStudent(account)
  }
+
+ async getStudentCourse(account:string) {
+    return studentRepository.getStudentAllCourseDetail(account)
+ }
+
 }
