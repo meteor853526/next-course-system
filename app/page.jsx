@@ -6,7 +6,10 @@ export default function Home() {
 
   return (
     <main className="gap-4 bg-slate-50 h-screen w-screen">
-     
+
+
+
+
     </main>
   )
 }
