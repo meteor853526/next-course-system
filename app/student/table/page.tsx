@@ -1,16 +1,11 @@
 'use client';
-import { getServerSession } from 'next-auth';
-import { options } from "../../api/auth/[...nextauth]/options"
-import { useSearchParams,usePathname   } from 'next/navigation';
-import { useSession } from 'next-auth/react';
+import { useSearchParams} from 'next/navigation';
 import Table from '../../../components/table'
 import { useState, useEffect } from 'react';
-export default  function usertable  ({}) {
+export default function usertable ({}) {
     const [timetableData, setTimetableData] = useState({});
     const [dataFetched, setDataFetched] = useState(false);
     const user = useSearchParams().get('user')
-
-    
 
     useEffect(() => {
         async function getstudentCourse(){
@@ -19,7 +14,7 @@ export default  function usertable  ({}) {
                 body: JSON.stringify({account:user})
             })
             const result = await apiResponse.json()
-            if(result){
+            if(result) {
                 setDataFetched(true);
                 setTimetableData(result);
             }
@@ -30,11 +25,7 @@ export default  function usertable  ({}) {
         console.log('i fire once');
     }, [dataFetched, user]);
 
-
-
     return <div className="">
-                
-                <h1>usertable</h1>
-                <Table timetableData={timetableData}></Table>
+                <Table timetableData={timetableData} ></Table>
            </div>;
   };

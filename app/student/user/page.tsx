@@ -8,7 +8,7 @@ interface user{
     role: string,
     account: string
 }
-export default  function userPage  () {
+export default function userPage  () {
     const { data: session } = useSession();
     const searchParams = useSearchParams()
 

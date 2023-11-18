@@ -1,5 +1,4 @@
-"use client";
-
+'use client';
 import React, { useMemo } from 'react';
 
 //MRT Imports
@@ -85,7 +84,7 @@ const Courselist = () => {
                   slotProps={{
                     textField: {
                       helperText: 'Filter Mode: Less Than',
-                      sx: { minWidth: '120px' },
+                      sx: { minWidth: '12px' },
                       variant: 'standard',
                     },
                   }}
@@ -177,7 +176,7 @@ const Courselist = () => {
         };
 
         return (
-          <div style={{ display: 'flex', gap: '0.5rem' }}>
+          <div style={{ display: 'flex', gap: '0.1rem' }}>
             <Button
               color="error"
               disabled={!table.getIsSomeRowsSelected()}

@@ -9,7 +9,6 @@ interface Staff {
 export default class StaffServicve{
 
  async getStaff(account:string) {
-  
    return staffRepository.getStaff(account)
  }
 }
