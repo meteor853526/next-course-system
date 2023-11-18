@@ -8,10 +8,6 @@ export default  function usertable  () {
     const [dataFetched, setDataFetched] = useState(false);
     const user = useSearchParams().get('user')
 
-
-
-
-
     useEffect(() => {
         async function getstudentCourse(){
             const apiResponse = await fetch('/api/student/course',{

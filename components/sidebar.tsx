@@ -32,6 +32,9 @@ export default function Sidebar() {
   const handleClickToCoursePage = async () => {
     router.push("/entrance/course");
   };
+  const handleClickToAllCoursePage = async () => {
+    router.push("/entrance/allcourse");
+  };
   const handleClickToUserPage = async () => {
     router.push(`/${session?.user?.role}/user/?user=${session?.user?.account}`);
   };
@@ -90,6 +93,12 @@ export default function Sidebar() {
                   <MdOutlineAnalytics className="text-2xl text-gray-600 group-hover:text-white " />
                     <h3 className="text-base text-gray-800 group-hover:text-white font-semibold ">
                       檢索課程
+                    </h3>
+                </div>
+                <div onClick={handleClickToAllCoursePage} className="flex  mb-2 justify-start items-center gap-4 pl-5 hover:bg-gray-900 p-2 rounded-md group cursor-pointer hover:shadow-lg m-auto">
+                  <MdOutlineAnalytics className="text-2xl text-gray-600 group-hover:text-white " />
+                    <h3 className="text-base text-gray-800 group-hover:text-white font-semibold ">
+                      所有課程
                     </h3>
                 </div>
                 {session?.user?.role === 'student'? (  // student function

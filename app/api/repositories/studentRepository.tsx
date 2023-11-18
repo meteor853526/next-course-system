@@ -32,6 +32,9 @@ export default class StudentRepository {
       console.log(res)
       return res;
     }   
+
+    async getAllCourse() {
+    }  
     async checkStudentCourseExist(account : string, course : string) {
       const res = await executeQuery({
           query: `SELECT JSON_CONTAINS(user.st_course, '"?"') AS value_exists 
@@ -43,7 +46,7 @@ export default class StudentRepository {
       return res;
     }  
     
-    async addStudentCourse(account : string, course : string) {
+    async addStudentCourse(account : string, course : string) { // add 
       const res = await executeQuery({
           query: `UPDATE user
                   SET st_course = JSON_ARRAY_APPEND(st_course, '$', '?')
@@ -53,6 +56,7 @@ export default class StudentRepository {
       console.log(res);
       return null;
     } 
+
     async deletStudentCourse(account : string, course : string) {
       const res = await executeQuery({
           query: `UPDATE user
