@@ -3,7 +3,7 @@ import { useSession } from 'next-auth/react'
 import { redirect } from 'next/navigation'
 import { useState, useEffect } from 'react';
 import React from 'react';
-import { useSearchParams } from 'next/navigation';
+
 export default function coursePage() {
     const [searchConditions, setSearchConditions] = useState({
         courseCode: '',
@@ -55,7 +55,21 @@ export default function coursePage() {
         // 設定搜尋結果
         setSearchResult(searchConditions);
     };
+    const handleResetConditions = () => {
+        // 重新設定搜尋條件為初始狀態
+        setSearchConditions({
+            courseCode: '',
+            instructor: '',
+            courseName: '',
+            dayOfWeek: '',
+            timesOfDay: '',
+            remainingSeats: '',
+        });
 
+        // 清除錯誤訊息和搜尋結果
+        setErrorMessage('');
+        setSearchResult(null);
+    };
     return (
         <div className="container">
             <h1>課程檢索</h1>
@@ -96,11 +110,11 @@ export default function coursePage() {
                         onChange={handleInputChange}
                     >
                         <option value="">不限</option>
-                        <option value="Monday">星期一</option>
-                        <option value="Tuesday">星期二</option>
-                        <option value="Wednesday">星期三</option>
-                        <option value="Thursday">星期四</option>
-                        <option value="Friday">星期五</option>
+                        <option value="一">星期一</option>
+                        <option value="二">星期二</option>
+                        <option value="三">星期三</option>
+                        <option value="四">星期四</option>
+                        <option value="五">星期五</option>
                         {/* 可以根據需求添加其他星期的選項 */}
                     </select>
                 </label>
@@ -143,6 +157,7 @@ export default function coursePage() {
                 {/* 其他條件輸入類似上面的方式添加 */}
             </div>
             <button onClick={handleSearch}>搜尋</button>
+            <button onClick={handleResetConditions}>重新輸入條件</button>
             {/* 顯示目前輸入的條件 */}
             {searchResult && (
                 <div>
