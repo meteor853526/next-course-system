@@ -25,9 +25,23 @@ export default function coursePage() {
             [name]: type === 'checkbox' ? (checked ? '1' : '') : value,
         }));
     };
+    // 重新設定搜尋條件為初始狀態
+    const handleResetConditions = () => {
+        setSearchConditions({
+            courseCode: '',
+            instructor: '',
+            courseName: '',
+            dayOfWeek: '',
+            timesOfDay: '',
+            remainingSeats: '',
+        });
 
+        // 清除錯誤訊息和搜尋結果
+        setErrorMessage('');
+        setSearchResult(null);
+    };
 
-    const handleSearch = () => {
+    const handleSearch = async () => {
         // 檢查是否有任何條件輸入
         const hasAnyCondition =
             Object.values(searchConditions).some((condition) => condition !== '');
@@ -45,31 +59,34 @@ export default function coursePage() {
             setErrorMessage('請完整輸入星期和時段');
             return;
         }
-
-        // 在這裡處理搜尋邏輯，你可以使用搜尋條件向 API 發送請求或進行本地搜尋
         console.log('搜尋條件:', searchConditions);
-        // 現在你可以執行實際的搜尋邏輯，例如發送 API 請求
+        try {
+            // 在這裡發送 API 請求，假設你的後端 API 路徑是 '/api/search'
+            const response = await fetch('/api/student/search', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(searchConditions),
+            });
 
-        // 清除錯誤訊息
-        setErrorMessage('');
-        // 設定搜尋結果
-        setSearchResult(searchConditions);
-    };
-    const handleResetConditions = () => {
-        // 重新設定搜尋條件為初始狀態
-        setSearchConditions({
-            courseCode: '',
-            instructor: '',
-            courseName: '',
-            dayOfWeek: '',
-            timesOfDay: '',
-            remainingSeats: '',
-        });
+            if (!response.ok) {
+                throw new Error('搜尋失敗');
+            }
 
-        // 清除錯誤訊息和搜尋結果
-        setErrorMessage('');
-        setSearchResult(null);
+            // 解析後端的回應，這裡假設後端返回 JSON 格式的搜尋結果
+            const result = await response.json();
+
+            // 清除錯誤訊息
+            setErrorMessage('');
+            // 設定搜尋結果
+            setSearchResult(result);
+        } catch (error) {
+            console.error('搜尋失敗', error);
+            setErrorMessage('搜尋失敗，請稍後再試');
+        }
     };
+
     return (
         <div className="container">
             <h1>課程檢索</h1>
@@ -159,18 +176,27 @@ export default function coursePage() {
             <button onClick={handleSearch}>搜尋</button>
             <button onClick={handleResetConditions}>重新輸入條件</button>
             {/* 顯示目前輸入的條件 */}
-            {searchResult && (
+            {searchResult && searchResult.length > 0 && (
                 <div>
-                    <h2>目前搜尋條件：</h2>
-                    <p>課程代碼：{searchResult.courseCode}</p>
-                    <p>課程名稱：{searchResult.courseName}</p>
-                    <p>授課教師：{searchResult.instructor}</p>
-                    <p>星期：{searchResult.dayOfWeek}</p>
-                    <p>時段：{searchResult.timesOfDay}</p>
-                    <p>餘額：{searchResult.remainingSeats}</p>
-                    {/* 顯示其他搜尋條件，可以根據需要添加 */}
+                    <h2>搜尋結果：</h2>
+                    {searchResult.map((result, index) => (
+                        <div key={index}>
+                            <p>課程代碼：{result['選課代碼']}</p>
+                            <p>課程名稱：{result['課程名稱']}</p>
+                            <p>授課教師：{result['授課教師']}</p>
+                            {/* Add more fields as needed */}
+                            <hr /> {/* Optional: Add a horizontal line between results */}
+                        </div>
+                    ))}
                 </div>
             )}
+
+            {searchResult && searchResult.length === 0 && (
+                <p>沒有符合條件的課程。</p>
+            )}
+
+
+
         </div>
     );
 };
