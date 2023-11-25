@@ -1,3 +1,4 @@
+//import { time } from 'console';
 import { executeQuery } from '../../../lib/api'
 
 export default class StudentRepository {
@@ -38,12 +39,56 @@ export default class StudentRepository {
   async getSearchCourse(searchConditions) {
     const { courseCode, instructor, courseName, dayOfWeek, timesOfDay, remainingSeats } = searchConditions;
 
-    const res = await executeQuery({
-      query: `SELECT *
-        FROM course
-        WHERE course.選課代碼 = ? OR 授課教師 = ? OR 課程名稱 = ?`,
-      values: [courseCode, instructor, courseName],
+    let whereClause = '1=1 '
+    const values = [];
+    if (courseCode) {
+      whereClause += 'AND 選課代碼 LIKE ? ';
+      values.push(courseCode);
+    }
+    if (instructor) {
+      whereClause += 'AND 授課教師 LIKE ? ';
+      values.push(`%${instructor}%`);
+    }
+    if (courseName) {
+      whereClause += 'AND 課程名稱 LIKE ? ';
+      values.push(`%${courseName}%`);
+    }
+    if (dayOfWeek) {
+      whereClause += 'AND 上課時間 LIKE ? ';
+      values.push(`%${dayOfWeek}%`);
+    }
+    if (timesOfDay) {
+      whereClause += 'AND 上課時間 LIKE ?  ';
+      values.push(`%${timesOfDay}%`);
+    }
+    /*const getstr = await executeQuery({
+      query: `SELECT 上課時間
+            FROM course
+            WHERE 上課時間 LIKE ? `,
+      values: [`%${timesOfDay}%`],
     });
+    console.log("星期", getstr);
+    let str = getstr[0]['上課時間'];
+    let numbers = str.match(/\d+/g);
+    console.log(numbers);
+  if (timesOfDay) {
+    // 使用正規表達式匹配星期一的第7節課
+    const regex = new RegExp(`\\(${dayOfWeek}\\)${timesOfDay}`);
+    whereClause += 'AND 上課時間 REGEXP ? ';
+    values.push(regex.source);
+  }*/
+
+
+    if (remainingSeats) {
+      whereClause += 'AND 開放名額>實收名額 ';
+    }
+    const query = `SELECT * FROM course WHERE ${whereClause} `;
+
+    const res = await executeQuery({
+      query,
+      values,
+    });
+
     console.log(res);
     return res;
   }
