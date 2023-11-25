@@ -1,6 +1,4 @@
 'use client';
-import { useSession } from 'next-auth/react'
-import { redirect } from 'next/navigation'
 import { useState, useEffect } from 'react';
 import React from 'react';
 
@@ -82,10 +80,10 @@ export default function coursePage() {
 
     return (
         <div className="container">
-            <h1 >課程檢索</h1>
+            <h1 className="header">課程檢索</h1>
             {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
             <div className="search-conditions">
-                <label>
+                <label className="lable">
                     課程代碼：
                     <input
                         type="text"
@@ -94,7 +92,7 @@ export default function coursePage() {
                         onChange={handleInputChange}
                     />
                 </label><br />
-                <label>
+                <label className="lable">
                     課程名稱：
                     <input
                         type="text"
@@ -103,7 +101,7 @@ export default function coursePage() {
                         onChange={handleInputChange}
                     />
                 </label><br />
-                <label>
+                <label className="lable">
                     授課教師：
                     <input
                         type="text"
@@ -112,7 +110,7 @@ export default function coursePage() {
                         onChange={handleInputChange}
                     />
                 </label><br />
-                <label>
+                <label className="lable">
                     星期：
                     <select
                         name="dayOfWeek"
@@ -128,7 +126,7 @@ export default function coursePage() {
                         {/* 可以根據需求添加其他星期的選項 */}
                     </select>
                 </label><br />
-                <label>
+                <label className="lable">
                     只顯示餘額：
                     <input
                         type="checkbox"
@@ -141,12 +139,12 @@ export default function coursePage() {
 
                 {/* 其他條件輸入類似上面的方式添加 */}
             </div>
-            <button onClick={handleSearch}>搜尋</button>
-            <button onClick={handleResetConditions}>重新輸入條件</button>
+            <button style={{ padding: '20px', fontSize: '16px' }} onClick={handleSearch}>搜尋</button>
+            <button style={{ padding: '20px', fontSize: '16px' }} onClick={handleResetConditions}>重新輸入條件</button>
             {/* 顯示目前輸入的條件 */}
             {searchResult && searchResult.length > 0 && (
                 <div>
-                    <h2>搜尋結果：</h2>
+                    <h2 className="h">搜尋結果：</h2>
                     {searchResult.map((result, index) => (
                         <div key={index}>
                             <p>課程代碼：{result['選課代碼']}</p>

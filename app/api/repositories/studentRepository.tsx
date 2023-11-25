@@ -61,22 +61,6 @@ export default class StudentRepository {
       whereClause += 'AND 上課時間 LIKE ?  ';
       values.push(`%${timesOfDay}%`);
     }
-    /*const getstr = await executeQuery({
-      query: `SELECT 上課時間
-            FROM course
-            WHERE 上課時間 LIKE ? `,
-      values: [`%${timesOfDay}%`],
-    });
-    console.log("星期", getstr);
-    let str = getstr[0]['上課時間'];
-    let numbers = str.match(/\d+/g);
-    console.log(numbers);
-  if (timesOfDay) {
-    // 使用正規表達式匹配星期一的第7節課
-    const regex = new RegExp(`\\(${dayOfWeek}\\)${timesOfDay}`);
-    whereClause += 'AND 上課時間 REGEXP ? ';
-    values.push(regex.source);
-  }*/
 
 
     if (remainingSeats) {
