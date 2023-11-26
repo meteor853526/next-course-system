@@ -27,3 +27,4 @@ export async function executeQuery({ query, values }) {
       throw error;
     }
 }
+

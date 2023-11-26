@@ -2,8 +2,9 @@ import React from 'react';
 export default function StudentTimetable({ timetableData }) {
     var timetable = []
     const regex = /\((.*?)\)(\d+)-(\d+)/;
-
+    var point = 0
     Object.entries(timetableData).map(([key, value]) => {
+      point += value['學分']
       const matches = value['上課時間'].match(regex);
       var [dayOfWeek, startTime, endTime] = matches.slice(1);
       startTime = parseInt(startTime, 10)
@@ -24,6 +25,7 @@ export default function StudentTimetable({ timetableData }) {
     return (
       <div>
         <h2 className="text-2xl font-bold mb-4">Timetable</h2>
+        <h3>總學分 : {point}</h3>
         <table className="table-fixed">
           <thead>
             <tr>

@@ -1,6 +1,5 @@
 //import { time } from 'console';
 import { executeQuery } from '../../../lib/api'
-
 export default class StudentRepository {
 
   async getStudent(account: string) {
@@ -76,23 +75,23 @@ export default class StudentRepository {
     console.log(res);
     return res;
   }
-  async checkStudentCourseExist(account: string, course: string) {
+  async checkStudentCourseExist(account: string, courseNumber: Number) {
+    const courseCode = String(courseNumber)
     const res = await executeQuery({
-      query: `SELECT JSON_CONTAINS(user.st_course, '"?"') AS value_exists 
-                  FROM user 
-                  WHERE account = ?`,
-      values: [course, account],
+      query: `SELECT JSON_CONTAINS(user.st_course, ?) AS value_exists 
+              FROM user 
+              WHERE account = ?`,
+      values: [courseCode,account],
     }); // 1 -> exist, 0 -> not exist
-    console.log(res);
-    return res;
+    return res[0];
   }
 
-  async addStudentCourse(account: string, course: string) { // add 
+  async addStudentCourse(account: string, courseNumber: Number) { // add 
     const res = await executeQuery({
       query: `UPDATE user
-                  SET st_course = JSON_ARRAY_APPEND(st_course, '$', '?')
-                  WHERE account = ?`,
-      values: [course, account],
+              SET st_course = JSON_ARRAY_APPEND(st_course, '$', ?)
+              WHERE account = ?`,
+      values: [courseNumber, account],
     });
     console.log(res);
     return null;
@@ -108,6 +107,8 @@ export default class StudentRepository {
     console.log(res);
     return null;
   }
+
+  
 
 
 

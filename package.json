@@ -22,6 +22,7 @@
     "@syncfusion/ej2-react-schedule": "^23.1.44",
     "bcrypt": "^5.1.1",
     "dayjs": "^1.11.10",
+    "lodash": "^4.17.21",
     "material-react-table": "^1.15.0",
     "mysql": "^2.18.1",
     "mysql2": "^3.6.1",

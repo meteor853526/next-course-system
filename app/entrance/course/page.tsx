@@ -1,8 +1,11 @@
 'use client';
 import { useState, useEffect } from 'react';
 import React from 'react';
-
+import { useSession } from "next-auth/react";
+import { useRouter } from 'next/navigation';
 export default function CoursePage() {
+    const { data: session } = useSession();
+    const router = useRouter();
     const [searchConditions, setSearchConditions] = useState({
         courseCode: '',
         instructor: '',
@@ -38,6 +41,32 @@ export default function CoursePage() {
         setErrorMessage('');
         setSearchResult(null);
     };
+
+    const handeleAddCourse = async (courseCode:number,courseTime:String,coursePoint:Number) => {
+        if(session){
+            try {
+                // 在這裡發送 API 請求，假設你的後端 API 路徑是 '/api/search'
+                const response = await fetch('/api/student/addcourse', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({account: session?.user.account, courseNumber:courseCode,courseTime:courseTime,coursePoint:coursePoint}),
+                });
+                const result = await response.json()
+                if (result) {
+                    alert(result['response'])
+                }
+    
+            } catch (error) {
+                console.error('失敗');
+                
+            }
+        } else {
+            alert('Please login')
+            router.push("/entrance/login");
+        }
+    }
 
     const handleSearch = async () => {
         // 檢查是否有任何條件輸入
@@ -157,7 +186,7 @@ export default function CoursePage() {
                             <p>開課班級：{result['開課班級']}</p>
                             <p>開放名額：{result['開放名額']}</p>
                             <p>實收名額：{result['實收名額']}</p>
-                            <button >加選</button>
+                            <button onClick={() => handeleAddCourse(result['選課代碼'],result['上課時間'],result['學分'])}>加選</button>
                             {/* Add more fields as needed */}
                             <hr /> {/* Optional: Add a horizontal line between results */}
                         </div>
