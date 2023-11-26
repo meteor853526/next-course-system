@@ -1,7 +1,7 @@
 'use client';
 import { useSession } from 'next-auth/react'
 import { redirect } from 'next/navigation'
-export default function coursePage  () {
+export default function AllCoursePage  () {
     // const {data:session} = useSession({
     //     required:true,
     //     onUnauthenticated() {

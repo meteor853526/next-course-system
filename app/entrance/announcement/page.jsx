@@ -1,6 +1,6 @@
 
 
-export default function announcementPage ()  {
+export default function AnnouncementPage ()  {
   return <div >
             {/* <div className=''>navbar</div>
 

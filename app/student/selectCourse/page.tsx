@@ -3,7 +3,7 @@ import { useSearchParams} from 'next/navigation';
 import Courselist from '../../../components/courselist'
 import Timetable from '../../../components/table'
 import { useState, useEffect } from 'react';
-export default  function usertable  () {
+export default  function UserSelectCourseTble  () {
     const [timetableData, setTimetableData] = useState({});
     const [dataFetched, setDataFetched] = useState(false);
     const user = useSearchParams().get('user')

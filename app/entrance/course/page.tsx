@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import React from 'react';
 
-export default function coursePage() {
+export default function CoursePage() {
     const [searchConditions, setSearchConditions] = useState({
         courseCode: '',
         instructor: '',

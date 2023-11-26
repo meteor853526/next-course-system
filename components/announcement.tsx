@@ -1,6 +1,6 @@
 import * as React from "react";
 
-export default function announcement() {
+export default function Announcement() {
   return (
   
         <div>
