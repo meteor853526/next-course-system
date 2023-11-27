@@ -26,7 +26,8 @@ export default  function UserSelectCourseTble  () {
         console.log('i fire once');
     }, [dataFetched, user]);
     return <div className="">
-                <Courselist></Courselist>
-                <Timetable timetableData={timetableData} ></Timetable>
+                {/* <Courselist></Courselist>
+                <Timetable timetableData={timetableData} ></Timetable> */}
+                <h1>沒東西</h1>
            </div>;
   };

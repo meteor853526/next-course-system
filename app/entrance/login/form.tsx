@@ -13,6 +13,7 @@ export default function Form() {
       username: formData.get('account'),
       password: formData.get('password'),
     });
+    
   };
   
   return (
@@ -24,11 +25,13 @@ export default function Form() {
         name="account"
         className="border border-black text-black"
         type="text"
+        id="enterForm"
       />
       <input
         name="password"
         className="border border-black  text-black"
         type="password"
+        id="enterForm"
       />
       <button type="submit">Login</button>
     </form>

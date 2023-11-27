@@ -35,11 +35,13 @@ export default function LoginPage() {
         name="account"
         className="border border-black text-black"
         type="text"
+        id="enterForm"
       />
       <input
         name="password"
         className="border border-black  text-black"
         type="password"
+        id="enterForm"
       />
       <button type="submit">Login</button>
     </form>
