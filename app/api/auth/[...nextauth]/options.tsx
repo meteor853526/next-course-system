@@ -1,6 +1,5 @@
 import type { NextAuthOptions } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
-import { compare } from 'bcrypt';
 import {getUser} from '../../../../lib/api'
 const bcrypt = require('bcrypt');
 export const options: NextAuthOptions = {
@@ -25,14 +24,13 @@ export const options: NextAuthOptions = {
                 // to verify with credentials
                 // Docs: https://next-auth.js.org/configuration/providers/credentials
                 const user = await getUser(credentials.username) // username 
-
                 const passwordCorrect = await bcrypt.compareSync(credentials.password,user.password)
-                console.log(passwordCorrect)
+                console.log(passwordCorrect) // bug , don't touch
    
                 if (passwordCorrect) {
                     return user
                 }
-                return null;
+                return Promise.resolve({ error: '帳號密碼錯誤或使用者不存在' });
             }
         })
     ],

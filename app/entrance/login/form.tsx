@@ -13,15 +13,8 @@ export default function Form() {
       username: formData.get('account'),
       password: formData.get('password'),
     });
-
-    console.log({ response });
-
-    if (!response?.error) {
-      console.log({ response });
-      router.push('/student');
-      router.refresh();
-    }
   };
+  
   return (
     <form
       onSubmit={handleSubmit}
