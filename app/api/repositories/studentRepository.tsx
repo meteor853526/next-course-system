@@ -13,8 +13,8 @@ export default class StudentRepository {
   async getStudentAllCourseNumber(account: string) {
     const res = await executeQuery({
       query: `SELECT st_course
-                  FROM user
-                  WHERE account = ?`,
+              FROM user
+              WHERE account = ?`,
       values: [account],
     });
     return res[0];
@@ -23,9 +23,9 @@ export default class StudentRepository {
 
     const res = await executeQuery({
       query: `SELECT course.*
-                  FROM course
-                  JOIN user ON JSON_CONTAINS(user.st_course, CAST(course.選課代碼 AS JSON))
-                  WHERE user.account = ?`,
+              FROM course
+              JOIN user ON JSON_CONTAINS(user.st_course, CAST(course.選課代碼 AS JSON))
+              WHERE user.account = ?`,
       values: [account],
     });
 
@@ -100,15 +100,15 @@ export default class StudentRepository {
   async deletStudentCourse(account: string, course: string) {
     const res = await executeQuery({
       query: `UPDATE user
-                  SET st_course = JSON_REMOVE(st_course, JSON_UNQUOTE(JSON_SEARCH(st_course, 'one', ?)))
-                  WHERE account = ?`,
+              SET st_course = JSON_REMOVE(st_course, JSON_UNQUOTE(JSON_SEARCH(st_course, 'one', ?)))
+              WHERE account = ?`,
       values: [course, account],
     });
     console.log(res);
     return null;
   }
 
-  
+
 
 
 

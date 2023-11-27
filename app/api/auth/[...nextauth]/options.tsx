@@ -2,7 +2,7 @@ import type { NextAuthOptions } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import { compare } from 'bcrypt';
 import {getUser} from '../../../../lib/api'
-
+const bcrypt = require('bcrypt');
 export const options: NextAuthOptions = {
     
     session: {
@@ -25,22 +25,12 @@ export const options: NextAuthOptions = {
                 // to verify with credentials
                 // Docs: https://next-auth.js.org/configuration/providers/credentials
                 const user = await getUser(credentials.username) // username 
-                
-                // const passwordCorrect = await compare(
-                //     credentials?.password || '',
-                //     result[0].password
-                // );
-                
-                // console.log({ passwordCorrect });
 
-                // wait for signupFinish 
-                // pass
-
-                if (user) {
-                    if (credentials.password === user.password) {
-                      return user// problems with "strict" mode issues 
-                      // see https://github.com/nextauthjs/next-auth/issues/2701 for more info
-                    }
+                const passwordCorrect = await bcrypt.compareSync(credentials.password,user.password)
+                console.log(passwordCorrect)
+   
+                if (passwordCorrect) {
+                    return user
                 }
                 return null;
             }

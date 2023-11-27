@@ -21,6 +21,7 @@
     "@syncfusion/ej2-react-buttons": "^23.1.43",
     "@syncfusion/ej2-react-schedule": "^23.1.44",
     "bcrypt": "^5.1.1",
+    "crypto": "^1.0.1",
     "dayjs": "^1.11.10",
     "lodash": "^4.17.21",
     "material-react-table": "^1.15.0",

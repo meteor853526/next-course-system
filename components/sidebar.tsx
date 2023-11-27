@@ -67,7 +67,7 @@ export default function Sidebar() {
                 <div>
                   {session ? ( 
                     <>
-                      <h1>姓名: {session?.user?.account}</h1>
+                      <h1>學號: {session?.user?.account}</h1>
                     </>
                   ) : (
                     <>
