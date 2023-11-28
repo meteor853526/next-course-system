@@ -1,3 +1,4 @@
+//import { time } from 'console';
 import { executeQuery } from '../../../lib/api'
 export default class StudentRepository {
 
@@ -33,22 +34,50 @@ export default class StudentRepository {
   }
 
   async getAllCourse() {
-      const res = await executeQuery({
-        query: `SELECT * FROM course`,
-        values: [],
-      }); // 1 -> exist, 0 -> not exist
+    const res = await executeQuery({
+      query: `SELECT * FROM course`,
+      values: [],
+    }); // 1 -> exist, 0 -> not exist
     console.log(res);
     return res;
-    }
+  }
   async getSearchCourse(searchConditions) {
     const { courseCode, instructor, courseName, dayOfWeek, timesOfDay, remainingSeats } = searchConditions;
 
+    let whereClause = '1=1 '
+    const values = [];
+    if (courseCode) {
+      whereClause += 'AND 選課代碼 LIKE ? ';
+      values.push(courseCode);
+    }
+    if (instructor) {
+      whereClause += 'AND 授課教師 LIKE ? ';
+      values.push(`%${instructor}%`);
+    }
+    if (courseName) {
+      whereClause += 'AND 課程名稱 LIKE ? ';
+      values.push(`%${courseName}%`);
+    }
+    if (dayOfWeek) {
+      whereClause += 'AND 上課時間 LIKE ? ';
+      values.push(`%${dayOfWeek}%`);
+    }
+    if (timesOfDay) {
+      whereClause += 'AND 上課時間 LIKE ?  ';
+      values.push(`%${timesOfDay}%`);
+    }
+
+
+    if (remainingSeats) {
+      whereClause += 'AND 開放名額>實收名額 ';
+    }
+    const query = `SELECT * FROM course WHERE ${whereClause} `;
+
     const res = await executeQuery({
-      query: `SELECT *
-        FROM course
-        WHERE course.選課代碼 = ? OR 授課教師 = ? OR 課程名稱 = ?`,
-      values: [courseCode, instructor, courseName],
+      query,
+      values,
     });
+
     console.log(res);
     return res;
   }
