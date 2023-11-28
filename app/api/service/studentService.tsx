@@ -14,6 +14,12 @@ export default class StudentServicve{
  async getStudentCourse(account:string) {
     return studentRepository.getStudentAllCourseDetail(account)
  }
+ async getAllCourse() {
+   return studentRepository.getAllCourse()
+}
+
+}
+
  async addStudentCourse(account:string,courseNumber:Number,courseTime:String,coursePoint:number) {
    const courseExist = await studentRepository.checkStudentCourseExist(account,courseNumber)
    console.log(courseExist)
